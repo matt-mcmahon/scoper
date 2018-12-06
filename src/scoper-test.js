@@ -6,7 +6,10 @@ const [a, b, c] = ['a', 'b', 'c']
 const styles = {
   a: 'aa',
   b: 'bb',
-  c: 'cc'
+  c: 'cc',
+  one: 'one1',
+  two: 'two2',
+  three: 'three3'
 }
 
 const scope = scoper(styles)
@@ -52,5 +55,12 @@ describe('scoper', async assert => {
     should: 'expand to "aa bb cc"',
     actual: scope`${a} ${b} ${c}`,
     expected: `aa bb cc`
+  })
+
+  assert({
+    given: 'A normal string',
+    should: 'work when invoked like a function',
+    actual: scope('one two three'),
+    expected: 'one1 two2 three3'
   })
 })
