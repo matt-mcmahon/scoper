@@ -1,0 +1,29 @@
+{
+  "name": "@mwm/scoper",
+  "version": "0.0.0",
+  "description": "Map friendly classNames to their unique Modular CSS classNames using Tagged Template Literals.",
+  "main": "index.js",
+  "module": "main.js",
+  "scripts": {
+    "test": "riteway -r esm src/**/*-test.js | tap-nirvana"
+  },
+  "keywords": [],
+  "author": "Matthew McMahon",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matt-mcmahon/scoper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/matt-mcmahon/scoper/issues"
+  },
+  "esm": {},
+  "homepage": "https://github.com/matt-mcmahon/scoper#readme",
+  "dependencies": {
+    "esm": "^3.0.84"
+  },
+  "devDependencies": {
+    "riteway": "^4.0.1",
+    "tap-nirvana": "^1.1.0"
+  }
+}
