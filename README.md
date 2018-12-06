@@ -41,7 +41,7 @@ instead of this 😟:
 <div className={styles['my-class'] + ' ' + styles.otherClass}>
 ```
 
-Finally, you can use call tagging function like a normal function, too!
+Finally, you can call the tagging function like a normal function, too!
 ```jsx
 <div className={scope('my-class otherClass')}>
 ```
