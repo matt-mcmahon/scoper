@@ -4,9 +4,9 @@
 
 Enter, __Scoper__! 🎆
 
-__Scoper__ takes the mapping object that tools like [WebPack][7] create when you import a CSS Module,
-and creates a [Tagged Template function][2] that lets you more easily attach generated class-names onto your HTML elements.
-Simply _tag_ a [template literal][4] that contains a [valid `className`][3] with the function that __Scoper__ creates for you, __Scoper__ will expand the names in the literal into their generated equivalents.
+__Scoper__ takes the mapping object tools like [WebPack][7] create when you import a CSS Module,
+and generates a [Tagged Template function][2] that you can use to easily attach the generated class-names to your HTML elements.
+Simply _tag_ a [template literal][4] containing any [valid `className`][3] with that function, and __Scoper__ will expand each class-name into its generated equivalent.
 
 
 ## Getting Started
@@ -17,23 +17,22 @@ Add __Scoper__ to your project using [NPM][5]:
 > npm install --save @mwm/scoper
 ```
 
-Then import it anywhere that you're using _CSS Modules_.
-(You can name the import and functions anything you want.)
+Then import __Scoper__ anywhere you're using _CSS Modules_.
 
 ```jsx
-import scoper from 'scoper'
+import styles from './App.module.css' // our css
+import scoper from 'scoper'           // Scoper!
 ```
 
-__Scoper__ doesn't do anything on it's own;
-it requires the _mapping_ object that [WebPack][7] creates when importing a CSS module.
-For example, we can pass the `styles` object below as an argument to the function we imported, and __Scoper__ will return a tagging function:
+__Scoper__ won't do anything on it's own;
+it needs the _mapping_ object [WebPack][7] creates.
+Simply pass the imported `styles` object to the `scoper` function, and __Scoper__ will return a _tag_ function (which we named "scope"):
 
 ```jsx
-import styles from './App.module.css'
 const scope = scoper(styles)
 ```
 
-With our tagging function in hand, we can then apply complicated scoped class-names like this 😊:
+Tagging function in hand, we can apply complicated scoped classes like this 😊:
 ```jsx
 <div className={scope`my-class otherClass`}>
 ```
@@ -42,22 +41,26 @@ instead of this 😟:
 <div className={styles['my-class'] + ' ' + styles.otherClass}>
 ```
 
+Finally, you can use call tagging function like a normal function, too!
+```jsx
+<div className={scope('my-class otherClass')}>
+```
 
 ## React Example
 
 This is what the `App.js` component might look like if [create-react-app][8] used _CSS Modules_ and __Scoper__ tagging.
 
-In this example, I've combined the root `<div>` and `<header>` elements to show how adding multiple classes works.
+For this example, I've combined the root `<div>` and `<header>` elements to show how adding multiple classes works.
 I've also renamed the "logo" class to "animated-logo", to show-off how easy kebab class-names are to use.
 Finally, the class-names that WebPack generates are configured to include the "App" prefix by default, so I removed that prefix from them.
 
-Here's the code:
+Here's the code!
 
 ```jsx
 import React, { Component } from 'react'
-import scoper from 'scoper'
 import logo from './logo.svg'
 import styles from './App.module.css'
+import scoper from 'scoper'
 
 const scope = scoper(styles)
 
