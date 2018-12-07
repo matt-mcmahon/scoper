@@ -12,6 +12,8 @@ export const scoper = styles => (classLiterals, ...classValues) => {
       styles && typeof styles[className] === 'string' ? styles[className] : ''
     )
     .join(' ')
+    .replace(/\s+/u, ' ')
+    .trim()
 }
 
 export default scoper

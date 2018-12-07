@@ -63,4 +63,25 @@ describe('scoper', async assert => {
     actual: scope('one two three'),
     expected: 'one1 two2 three3'
   })
+
+  assert({
+    given: '`one undefined`',
+    should: 'not add an extra space at the end',
+    actual: scope`one undefined`,
+    expected: `one1`
+  })
+
+  assert({
+    given: '`undefined two`',
+    should: 'not add an extra space at the beginning',
+    actual: scope`undefined two`,
+    expected: `two2`
+  })
+
+  assert({
+    given: '`one undefined three`',
+    should: 'not add extra spaces in the middle',
+    actual: scope`one undefined three`,
+    expected: `one1 three3`
+  })
 })
