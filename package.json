@@ -19,10 +19,17 @@
   },
   "esm": {},
   "homepage": "https://github.com/matt-mcmahon/scoper#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm test"
+    }
+  },
   "dependencies": {
     "esm": "^3.0.84"
   },
   "devDependencies": {
+    "husky": "^1.2.0",
     "riteway": "^4.0.1",
     "tap-nirvana": "^1.1.0"
   }
