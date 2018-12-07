@@ -7,7 +7,9 @@
   "scripts": {
     "test": "riteway -r esm src/**/*-test.js | tap-nirvana"
   },
-  "keywords": [],
+  "keywords": [
+    "css-modules"
+  ],
   "author": "Matthew McMahon",
   "license": "MIT",
   "repository": {
