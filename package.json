@@ -3,7 +3,7 @@
   "version": "1.1.1",
   "description": "Map friendly classNames to their unique Modular CSS classNames using Tagged Template Literals.",
   "main": "index.js",
-  "module": "main.js",
+  "module": "./src/main.js",
   "scripts": {
     "test": "riteway -r esm src/**/*-test.js | tap-nirvana"
   },
