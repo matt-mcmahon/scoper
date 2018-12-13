@@ -1,5 +1,5 @@
 import { describe, Try } from 'riteway'
-import defaultExport, { scoper } from './scoper.js'
+import defaultExport, { scoper, classer } from './scoper'
 
 const [a, b, c] = ['a', 'b', 'c']
 
@@ -13,6 +13,7 @@ const styles = {
 }
 
 const scope = scoper(styles)
+const className = classer(styles)
 
 describe('scoper', async assert => {
   assert({
@@ -83,5 +84,21 @@ describe('scoper', async assert => {
     should: 'not add extra spaces in the middle',
     actual: scope`one undefined three`,
     expected: `one1 three3`
+  })
+})
+
+describe('classer', async assert => {
+  assert({
+    given: 'classer import',
+    should: 'be a function',
+    actual: typeof classer,
+    expected: 'function'
+  })
+
+  assert({
+    given: 'a b c',
+    should: 'return { className: "aa bb cc" }',
+    actual: className`a b c`,
+    expected: { className: 'aa bb cc' }
   })
 })
