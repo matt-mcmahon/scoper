@@ -88,7 +88,48 @@ class App extends Component {
 export default App
 ```
 
+Added alternate function, `classer`.
+You can use the _classer_ named export in React apps to avoid typing out <code>className={scope\`whatever\`}</code>.
+Instead, combine classer with the spread operator for less typing:
 
+```js
+const className = classer(someImportedCSSModule)
+const someJSX = <div {...className`something`} />
+```
+
+For example:
+
+```jsx
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import styles from './App.module.css'
+import { classer } from 'scoper'
+
+const className = classer(styles)
+
+class App extends Component {
+  render () {
+    return (
+      <header {...className`root header`}>
+        <img {...className`animated-logo`} src={logo} alt='logo' />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          {...className`link`}
+          href='https://reactjs.org'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Learn React
+        </a>
+      </header>
+    )
+  }
+}
+
+export default App
+```
 
 
 [1]: https://github.com/css-modules/css-modules
