@@ -21,7 +21,7 @@ Then import __Scoper__ anywhere you're using _CSS Modules_.
 
 ```jsx
 import styles from './App.module.css' // our css
-import scoper from 'scoper'           // Scoper!
+import scoper from '@mwm/scoper'           // Scoper!
 ```
 
 __Scoper__ won't do anything on it's own;
@@ -60,7 +60,7 @@ Here's the code!
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import styles from './App.module.css'
-import scoper from 'scoper'
+import scoper from '@mwm/scoper'
 
 const scope = scoper(styles)
 
@@ -103,7 +103,7 @@ For example:
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import styles from './App.module.css'
-import { classer } from 'scoper'
+import { classer } from '@mwm/scoper'
 
 const className = classer(styles)
 
