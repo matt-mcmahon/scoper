@@ -13,4 +13,5 @@ export const interpolate = (as = [], bs = []) => {
   }
   return result.filter(v => /\S/u.test(v))
 }
+
 export default interpolate

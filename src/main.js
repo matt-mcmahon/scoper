@@ -1,5 +1,3 @@
-// ESM syntax is supported.
-import scoper from './scoper.js'
-
+import scoper from './scoper'
 export { scoper }
 export default scoper
