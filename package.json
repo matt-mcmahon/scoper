@@ -5,6 +5,8 @@
   "main": "index.js",
   "module": "./src/main.js",
   "scripts": {
+    "fix": "prettier --write src/**/*.js",
+    "pretest": "prettier-check src/**/*.js",
     "test": "riteway -r esm src/**/*-test.js | tap-nirvana"
   },
   "keywords": [
@@ -32,6 +34,8 @@
   },
   "devDependencies": {
     "husky": "^1.2.0",
+    "prettier": "^1.15.3",
+    "prettier-check": "^2.0.0",
     "riteway": "^4.0.1",
     "tap-nirvana": "^1.1.0"
   }

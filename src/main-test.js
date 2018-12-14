@@ -10,7 +10,7 @@ describe('main.js', async assert => {
   })
 
   {
-    const expected = ['default', 'scoper'].sort()
+    const expected = ['default', 'scoper', 'classer'].sort()
     const actual = Object.keys(allExports).sort()
 
     assert({
