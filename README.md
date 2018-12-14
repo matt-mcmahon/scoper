@@ -2,53 +2,56 @@
 
 [CSS Modules][1] are a popular way to style your websites, but could be easier to use.
 
-Enter, __Scoper__! 🎆
+Enter, **Scoper**! 🎆
 
-__Scoper__ takes the mapping object tools like [WebPack][7] create when you import a CSS Module,
+**Scoper** takes the mapping object tools like [WebPack][7] create when you import a CSS Module,
 and generates a [Tagged Template function][2] that you can use to easily attach the generated class-names to your HTML elements.
-Simply _tag_ a [template literal][4] containing any [valid `className`][3] with that function, and __Scoper__ will expand each class-name into its generated equivalent.
-
+Simply _tag_ a [template literal][4] containing any [valid `className`][3] with that function, and **Scoper** will expand each class-name into its generated equivalent.
 
 ## Getting Started
 
-Add __Scoper__ to your project using [NPM][5]:
+Add **Scoper** to your project using [NPM][5]:
 
 ```
 > npm install --save @mwm/scoper
 ```
 
-Then import __Scoper__ anywhere you're using _CSS Modules_.
+Then import **Scoper** anywhere you're using _CSS Modules_.
 
 ```jsx
 import styles from './App.module.css' // our css
-import scoper from '@mwm/scoper'           // Scoper!
+import scoper from '@mwm/scoper' // Scoper!
 ```
 
-__Scoper__ won't do anything on it's own;
+**Scoper** won't do anything on it's own;
 it needs the _mapping_ object [WebPack][7] creates.
-Simply pass the imported `styles` object to the `scoper` function, and __Scoper__ will return a _tag_ function (which we named "scope"):
+Simply pass the imported `styles` object to the `scoper` function, and **Scoper** will return a _tag_ function (which we named "scope"):
 
 ```jsx
 const scope = scoper(styles)
 ```
 
 Tagging function in hand, we can apply complicated scoped classes like this 😊:
+
 ```jsx
 <div className={scope`my-class otherClass`}>
 ```
+
 instead of this 😟:
+
 ```jsx
 <div className={styles['my-class'] + ' ' + styles.otherClass}>
 ```
 
 Finally, you can call the tagging function like a normal function, too!
+
 ```jsx
 <div className={scope('my-class otherClass')}>
 ```
 
-## React Example
+## Using Scoper With React
 
-This is what the `App.js` component might look like if [create-react-app][8] used _CSS Modules_ and __Scoper__ tagging.
+This is what the `App.js` component might look like if [create-react-app][8] used _CSS Modules_ and **Scoper** tagging.
 
 For this example, I've combined the root `<div>` and `<header>` elements to show how adding multiple classes works.
 I've also renamed the "logo" class to "animated-logo", to show-off how easy kebab class-names are to use.
@@ -65,7 +68,7 @@ import scoper from '@mwm/scoper'
 const scope = scoper(styles)
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <header className={scope`root header`}>
         <img className={scope`animated-logo`} src={logo} alt='logo' />
@@ -88,16 +91,21 @@ class App extends Component {
 export default App
 ```
 
+## Using Classer With React
+
 Added alternate function, `classer`.
 You can use the _classer_ named export in React apps to avoid typing out <code>className={scope\`whatever\`}</code>.
-Instead, combine classer with the spread operator for less typing:
+Instead, combine classer with the [spread operator][9] and type less!
+Using `classer` is similar to `scoper`.
+For example:
 
 ```js
+import { classer } from '@mwm/scoper'
 const className = classer(someImportedCSSModule)
 const someJSX = <div {...className`something`} />
 ```
 
-For example:
+Here's React's default App example using the `classer` tagged function:
 
 ```jsx
 import React, { Component } from 'react'
@@ -108,7 +116,7 @@ import { classer } from '@mwm/scoper'
 const className = classer(styles)
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <header {...className`root header`}>
         <img {...className`animated-logo`} src={logo} alt='logo' />
@@ -131,7 +139,6 @@ class App extends Component {
 export default App
 ```
 
-
 [1]: https://github.com/css-modules/css-modules
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/Element/className
@@ -140,3 +147,4 @@ export default App
 [6]: https://reactjs.org/
 [7]: https://webpack.js.org/
 [8]: https://facebook.github.io/create-react-app/
+[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
