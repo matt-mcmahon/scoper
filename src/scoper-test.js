@@ -1,104 +1,86 @@
-import { describe, Try } from 'riteway'
-import defaultExport, { scoper, classer } from './scoper'
+import { describe, Try } from "riteway"
+import defaultExport, { scoper } from "./scoper"
+import { scoper as mainExport } from "./main"
+import styles from "./test-styles.json"
 
-const [a, b, c] = ['a', 'b', 'c']
+describe("scoper", async assert => {
+  const [a, b, c] = ["a", "b", "c"]
+  const scope = scoper(styles)
 
-const styles = {
-  a: 'aa',
-  b: 'bb',
-  c: 'cc',
-  one: 'one1',
-  two: 'two2',
-  three: 'three3'
-}
-
-const scope = scoper(styles)
-const className = classer(styles)
-
-describe('scoper', async assert => {
   assert({
-    given: 'default export',
-    should: 'be function',
-    actual: typeof defaultExport,
-    expected: 'function'
+    given: "scoper",
+    should: "be function",
+    actual: typeof scoper,
+    expected: "function",
   })
 
   assert({
-    given: 'named export',
-    should: 'be function',
-    actual: typeof scoper,
-    expected: 'function'
+    given: "main export",
+    should: "be identicial to scoper",
+    actual: mainExport === scoper,
+    expected: true,
+  })
+
+  assert({
+    given: "default export",
+    should: "be identicial to scoper",
+    actual: defaultExport === scoper,
+    expected: true,
   })
 
   assert({
     given: 'className "a"',
     should: 'expand to "aa"',
     actual: scope`a`,
-    expected: `aa`
+    expected: `aa`,
   })
 
   assert({
     given: 'className "a b"',
     should: 'expand to "aa bb"',
     actual: scope`a b`,
-    expected: `aa bb`
+    expected: `aa bb`,
   })
 
   assert({
     given: ' template "a ${b} c"',
     should: 'expand to "aa bb cc"',
     actual: scope`a ${b} c`,
-    expected: `aa bb cc`
+    expected: `aa bb cc`,
   })
 
   assert({
-    given: '${a} ${b} ${c}',
+    given: "${a} ${b} ${c}",
     should: 'expand to "aa bb cc"',
     actual: scope`${a} ${b} ${c}`,
-    expected: `aa bb cc`
+    expected: `aa bb cc`,
   })
 
   assert({
-    given: 'A normal string',
-    should: 'work when invoked like a function',
-    actual: scope('one two three'),
-    expected: 'one1 two2 three3'
+    given: "A normal string",
+    should: "work when invoked like a function",
+    actual: scope("one two three"),
+    expected: "one1 two2 three3",
   })
 
   assert({
-    given: '`one undefined`',
-    should: 'not add an extra space at the end',
+    given: "`one undefined`",
+    should: "not add an extra space at the end",
     actual: scope`one undefined`,
-    expected: `one1`
+    expected: `one1`,
   })
 
   assert({
-    given: '`undefined two`',
-    should: 'not add an extra space at the beginning',
+    given: "`undefined two`",
+    should: "not add an extra space at the beginning",
     actual: scope`undefined two`,
-    expected: `two2`
+    expected: `two2`,
   })
 
   assert({
-    given: '`one undefined three`',
-    should: 'not add extra spaces in the middle',
+    given: "`one undefined three`",
+    should: "not add extra spaces in the middle",
     actual: scope`one undefined three`,
-    expected: `one1 three3`
-  })
-})
-
-describe('classer', async assert => {
-  assert({
-    given: 'classer import',
-    should: 'be a function',
-    actual: typeof classer,
-    expected: 'function'
-  })
-
-  assert({
-    given: 'a b c',
-    should: 'return { className: "aa bb cc" }',
-    actual: className`a b c`,
-    expected: { className: 'aa bb cc' }
+    expected: `one1 three3`,
   })
 })

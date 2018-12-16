@@ -1,3 +1,4 @@
-import { scoper, classer } from './scoper'
-export { scoper, classer }
-export default scoper
+import scoper from "./scoper"
+import classer from "./classer"
+
+export { scoper, classer, scoper as default }
