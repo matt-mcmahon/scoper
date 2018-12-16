@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "prettier --write src/**/*.js",
     "pretest": "prettier-check src/**/*.js",
-    "test": "riteway -r esm src/**/*-test.js | tap-nirvana"
+    "test": "riteway -r esm src/**/*.test.js | tap-nirvana"
   },
   "keywords": [
     "css-modules"
