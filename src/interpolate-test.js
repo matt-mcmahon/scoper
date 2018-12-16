@@ -1,98 +1,111 @@
-import { describe, Try } from 'riteway'
-import defaultExport, { interpolate, splitTrim } from './interpolate'
+import { describe, Try } from "riteway"
+import defaultExport, { interpolate, splitTrim } from "./interpolate"
 
-const [a, b, c, d, e, f] = ['a', 'b', 'c', 'd', 'e', 'f']
+const [a, b, c, d, e, f] = ["a", "b", "c", "d", "e", "f"]
 
-describe('splitTrim', async assert => {
+describe("splitTrim", async assert => {
   assert({
-    given: ' a b c ',
-    should: 'split with no extra spaces',
-    actual: splitTrim(' a b c '),
-    expected: [a, b, c]
+    given: " a b c ",
+    should: "split with no extra spaces",
+    actual: splitTrim(" a b c "),
+    expected: [a, b, c],
   })
 })
 
-describe('interpolate', async assert => {
+describe("interpolate", async assert => {
   assert({
-    given: 'default export',
-    should: 'be function',
+    given: "default export",
+    should: "be function",
     actual: typeof defaultExport,
-    expected: 'function'
+    expected: "function",
   })
 
   assert({
-    given: 'named export',
-    should: 'be function',
+    given: "named export",
+    should: "be function",
     actual: typeof interpolate,
-    expected: 'function'
+    expected: "function",
   })
 
   assert({
-    given: 'no arguments',
-    should: 'return an empty array',
+    given: "no arguments",
+    should: "return an empty array",
     actual: interpolate(),
-    expected: []
+    expected: [],
   })
 
   assert({
-    given: 'only 1st array',
-    should: 'return copy of 1st array',
+    given: "only 1st array",
+    should: "return copy of 1st array",
     actual: interpolate([a, b, c]),
-    expected: [a, b, c]
+    expected: [a, b, c],
   })
 
   assert({
-    given: 'multiple words in a single element',
-    should: 'split those words',
-    actual: interpolate(['a b c']),
-    expected: [a, b, c]
+    given: "multiple words in a single element",
+    should: "split those words",
+    actual: interpolate(["a b c"]),
+    expected: [a, b, c],
   })
 
   assert({
-    given: 'two arrays of the same length',
-    should: 'interpolate those arrays',
+    given: "two arrays of the same length",
+    should: "interpolate those arrays",
     actual: interpolate([a, c, e], [b, d, f]),
-    expected: [a, b, c, d, e, f]
+    expected: [a, b, c, d, e, f],
   })
 
   assert({
-    given: `a second array that's shorter than the first`,
-    should: `return all elements of a interpolated with b`,
+    given: `shorter second array`,
+    should: `include all elements of both`,
     actual: interpolate([a, c, e, f], [b, d]),
-    expected: [a, b, c, d, e, f]
+    expected: [a, b, c, d, e, f],
   })
 
   assert({
-    given: `a second array that's longer than the first`,
-    should: `return a interpolated with b and the rest of b`,
+    given: `shorter first array`,
+    should: `include all elements of both`,
     actual: interpolate([a, c], [b, d, e, f]),
-    expected: [a, b, c, d, e, f]
+    expected: [a, b, c, d, e, f],
+  })
+
+  {
+    const as = undefined
+    const bs = [a, b, c]
+    const actual = interpolate(as, bs)
+    const expected = [a, b, c]
+    assert({
+      given: `undefined first array`,
+      should: `return a copy of second array`,
+      actual,
+      expected,
+    })
+    assert({
+      given: `undefined first array`,
+      should: `... but not second array`,
+      actual: bs === actual,
+      expected: false,
+    })
+  }
+
+  assert({
+    given: `array 1 with unsplit words`,
+    should: `maintain correct order`,
+    actual: interpolate([a, "c d", f], [b, e]),
+    expected: [a, b, c, d, e, f],
   })
 
   assert({
-    given: `nothing as the first array and a second array`,
-    should: `return a copy of the second array`,
-    actual: interpolate(undefined, [a, b, c]),
-    expected: [a, b, c]
+    given: `array 2 with unsplit words`,
+    should: `maintain correct order`,
+    actual: interpolate([a, d, f], ["b c", e]),
+    expected: [a, b, c, d, e, f],
   })
 
   assert({
-    given: `an a2 with multiple words in one element`,
-    should: `interpolate in the right order`,
-    actual: interpolate([a, d, f], ['b c', e]),
-    expected: [a, b, c, d, e, f]
-  })
-  assert({
-    given: `an a1 with multiple words in one element`,
-    should: `interpolate in the right order`,
-    actual: interpolate([a, 'c d', f], [b, e]),
-    expected: [a, b, c, d, e, f]
-  })
-
-  assert({
-    given: `extra spacing in elements`,
+    given: `extra spacing`,
     should: `trim spacing`,
-    actual: interpolate(['a ', ' c'], 'b'),
-    expected: [a, b, c]
+    actual: interpolate(["a ", " c"], "b"),
+    expected: [a, b, c],
   })
 })
