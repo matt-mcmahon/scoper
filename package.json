@@ -5,7 +5,7 @@
   "main": "index.js",
   "module": "./src/main.js",
   "scripts": {
-    "fix": "prettier --write src/**/*.js",
+    "lint": "prettier --write src/**/*.js",
     "pretest": "prettier-check src/**/*.js",
     "test": "riteway -r esm src/**/*-test.js | tap-nirvana"
   },
